@@ -16,13 +16,13 @@ let db;
 (async () => {
   try {
     // Connect to MySQL without specifying a database
-    console.log('尝试连接数据库');
+  
     const connection = await mysql.createConnection({
       host: 'localhost',
       user: 'root',
       password: '123456',
     });
-    console.log('初始连接成功');
+  
 
     // Create the database if it doesn't exist
     await connection.query('CREATE DATABASE IF NOT EXISTS testdb');
