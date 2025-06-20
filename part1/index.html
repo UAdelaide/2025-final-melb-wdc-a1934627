@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dog of the Day</title>
+  <script src="https://unpkg.com/vue@3"></script>
+  <style>
+    body {
+      background-color: pink;
+      font-family: cursive;
+      text-align: center;
+    }
+    .big-button {
+      font-size: 28px;
+      padding: 20px;
+    }
+    .flashing {
+      color: red;
+      animation: blink 0.5s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1 class="flashing">DOG OF THE DAY!!! 🐶🐕🐩</h1>
+    <button class="big-button" @click="loadDog">SEE DOG</button>
+    <img v-if="dogUrl" :src="dogUrl">
+    <p>Name: GOOD DOG</p>
+    <p>Breed: BEST BREED</p>
+  </div>
+
+  <script>
+    Vue.createApp({
+      data() {
+        return { dogUrl: '' }
+      },
+      methods: {
+        async loadDog() {
+          const res = await fetch("https://dog.ceo/api/breeds/image/random");
+          const data = await res.json();
+          this.dogUrl = data.message;
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
