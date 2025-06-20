@@ -57,6 +57,16 @@ app.post('/login', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+app.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.error("Logout failed:", err);
+      return res.status(500).send("Logout failed");
+    }
+    res.clearCookie('connect.sid');
+    res.redirect('/');
+  });
+});
 
 
 // Export the app instead of listening here
